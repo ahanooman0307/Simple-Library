@@ -1,5 +1,5 @@
-const add = document.querySelector("add");
-const books = document.querySelector("books");
+const add = document.querySelector("#add");
+const books = document.querySelector("#books");
 
 let myLibrary = [];
 
@@ -15,24 +15,29 @@ function Book(title, author, pages, read){
     }
 }
 
-function addBooktoLibrary(book){
-    myLibrary.concat(book);
+
+function displayLibrary(){
+let size = myLibrary.length;
+console.log(size);
+let index = size - 1;
+let title = myLibrary[index].title;
+console.log(title);
 }
 
 const book1 = new Book('goosebumps', 'rl grime', 200, true);
+addBook(book1); 
 
-function addBook(){
-let title = "title";
-let author = "author";
-let pages = 5;
-let read = true;
+function addBook(bookObject){ //this should be called after the display bookObject creation like inside the function
+    
+let title = bookObject.title
+let author = bookObject.title
+let pages = bookObject.pages
+let read = bookObject.read
 
 const newBook = new Book(title, author, pages, read);
-books.appendChild(newBook);
-myLibrary.concat(newBook);
+myLibrary.push(newBook);
 console.log(5);
-
-
+displayLibrary();
 
 }
 
