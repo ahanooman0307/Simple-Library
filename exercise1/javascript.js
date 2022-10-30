@@ -1,5 +1,5 @@
 const add = document.querySelector("#add");
-const books = document.querySelector("#books");
+const books = document.querySelector("#books"); //library
 const form = document.querySelector("#createBook");
 const title = document.getElementById("title");
 const author = document.getElementById("author");
@@ -30,38 +30,55 @@ function closeTheForm() {
   }
 
 
-function displayLibrary(){
-    let size = myLibrary.length;
-    console.log(size);
-    let index = size - 1;
-    let title = myLibrary[index].title;
-    console.log(title);
+function updateLibrary(bookObject){
+
+    
+    
+    let index = myLibrary.length - 1;
+
+
+    const newBook = document.createElement('div');
+    const title = document.createElement('div');
+    const author = document.createElement('div');
+    const pages = document.createElement('div');
+    const read = document.createElement('div');
+    
+    if(bookObject.read == "on"){ //if statement to check if the book was read or not
+        read.textContent = "Read";
+    }
+    else{
+        read.textContent = "Not Read";
+    }
+
+    newBook.classList.toggle('book'); //gives newBook book class so that it can access css style
+    
+    newBook.setAttribute('id', `${index}`); //adds id to remove later if needed
+    title.textContent = bookObject.title;
+    author.textContent = bookObject.author;
+    pages.textContent = bookObject.pages;
+    newBook.appendChild(title);//adds new title element to book element
+    newBook.appendChild(author);//adds new author element to book element
+    newBook.appendChild(pages);//adds new pages element to book element
+    newBook.appendChild(read);//adds new read element to book element
+
+
+    // newBook.textContent = `${bookObject.title} \n ${bookObject.author}`;
+    books.appendChild(newBook); //add book to library
+    // title.textContent = bookObject.title;
+    console.log(bookObject.title);
+
 }
 
-const book1 = new Book('goosebumps', 'rl grime', 200, true);
 
 
 
-// function addBook(bookObject){ //this should be called after the display bookObject creation like inside the function
-    
-// let title = bookObject.title
-// let author = bookObject.title
-// let pages = bookObject.pages
-// let read = bookObject.read
 
-
-// displayLibrary();
-
-// }
 
 function getData(e){ //creates Book Object from form data
     const newBook = new Book(title.value, author.value, pages.value, read.value)
+    console.log(read.value);
     myLibrary.push(newBook)
-        // console.log(title.value);
-    // console.log(author.value);
-    // console.log(pages.value);
-    // console.log(read.value);
-    displayLibrary();
+    updateLibrary(newBook);
 
 
     e.preventDefault();
