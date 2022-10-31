@@ -7,9 +7,9 @@ const pages = document.getElementById("pages");
 const read = document.getElementById("read");
 
 
-let myLibrary = [];
+let myLibrary = []; //array to store the book objects
 
-function Book(title, author, pages, read){
+function Book(title, author, pages, read){ //book class
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -21,19 +21,19 @@ function Book(title, author, pages, read){
     }
 }
 
-function openTheForm() {
+function openTheForm() { //function to open the form 
     document.getElementById("popupForm").style.display = "block";
   }
-  
-function closeTheForm() {
+
+function closeTheForm() {//function to close the form
     document.getElementById("popupForm").style.display = "none";
   }
 
 
 function updateLibrary(bookObject){
 
-    
-    
+
+
     let index = myLibrary.length - 1;
 
 
@@ -42,31 +42,44 @@ function updateLibrary(bookObject){
     const author = document.createElement('div');
     const pages = document.createElement('div');
     const read = document.createElement('div');
-    
-    if(bookObject.read == "on"){ //if statement to check if the book was read or not
-        read.textContent = "Read";
-    }
-    else{
-        read.textContent = "Not Read";
-    }
+
 
     newBook.classList.toggle('book'); //gives newBook book class so that it can access css style
-    
+    read.classList.toggle('read');
+
+
+
+
+
+
     newBook.setAttribute('id', `${index}`); //adds id to remove later if needed
-    title.textContent = bookObject.title;
-    author.textContent = bookObject.author;
-    pages.textContent = bookObject.pages;
+    title.textContent = `"${bookObject.title}"`;
+    author.textContent = `by ${bookObject.author}`;
+    pages.textContent = `${bookObject.pages} pages`;
     newBook.appendChild(title);//adds new title element to book element
     newBook.appendChild(author);//adds new author element to book element
     newBook.appendChild(pages);//adds new pages element to book element
     newBook.appendChild(read);//adds new read element to book element
+
+    if(bookObject.read == true){ //if statement to check if the book was read or not
+        read.textContent = "Read";
+
+        read.style.cssText = "background-color: green";
+    }
+    else{
+        read.textContent = "Not Read";
+
+        read.style.cssText = "background-color: red";
+
+    }
 
 
     // newBook.textContent = `${bookObject.title} \n ${bookObject.author}`;
     books.appendChild(newBook); //add book to library
     // title.textContent = bookObject.title;
     console.log(bookObject.title);
-
+    updateRead(bookObject); //problem is that bookObject.read does not get updated within scope
+    
 }
 
 
@@ -75,7 +88,7 @@ function updateLibrary(bookObject){
 
 
 function getData(e){ //creates Book Object from form data
-    const newBook = new Book(title.value, author.value, pages.value, read.value)
+    const newBook = new Book(title.value, author.value, pages.value, read.checked)
     console.log(read.value);
     myLibrary.push(newBook)
     updateLibrary(newBook);
@@ -86,10 +99,41 @@ function getData(e){ //creates Book Object from form data
     closeTheForm();
 
 
+
+
 }
+
+function updateRead(bookObject){ //bool read parameter passed to check if the book was read or not
+
+   
+    const allRead = document.querySelectorAll('.read');
+    allRead.forEach((m) => { // I used the .forEach method to iterate through each box
+
+      // and for each box I add a 'click' listener
+      m.addEventListener('click', () => {
+        let read = bookObject.read; //this is placed here so that read gets redefined after every click
+            console.log(bookObject.read);
+        if(read == true){
+            m.style.cssText = "background-color: red";
+            m.textContent = "Not Read";
+            bookObject.read = false;
+        }
+        else{
+            m.style.cssText = "background-color: green";
+            m.textContent = "Read";
+            bookObject.read = true;
+        }
+      });
+
+    });
+
+}
+
+
 
 
 
 add.addEventListener('click', openTheForm);
 
 form.addEventListener('submit', getData)
+
