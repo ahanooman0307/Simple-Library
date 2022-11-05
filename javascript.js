@@ -40,17 +40,18 @@ function updateLibrary(bookObject){ //function to add book to library and remove
     const author = document.createElement('div');//given author
     const pages = document.createElement('div');
     const read = document.createElement('button');
-    const remove = document.createElement('button');
+    const remove = document.createElement('div');
 
 
     newBook.classList.toggle('book'); //gives newBook book class so that it can access css style
-    read.classList.toggle('read');
+    read.classList.add('read');
+    remove.classList.add('remove');
 
 
     title.textContent = `"${bookObject.title}"`;
     author.textContent = `by ${bookObject.author}`;
     pages.textContent = `${bookObject.pages} pages`;
-    remove.textContent = "Remove";
+    remove.textContent = "x";
     newBook.appendChild(title);//adds new title element to book element
     newBook.appendChild(author);//adds new author element to book element
     newBook.appendChild(pages);//adds new pages element to book element
@@ -60,7 +61,7 @@ function updateLibrary(bookObject){ //function to add book to library and remove
     if(bookObject.read == true){ //if statement to check if the book was read or not
         read.textContent = "Read";
 
-        read.style.cssText = "background-color: green";
+        read.style.cssText = "background-color: rgb(58, 224, 72)"
     }
     else{
         read.textContent = "Not Read";
@@ -80,7 +81,7 @@ function updateLibrary(bookObject){ //function to add book to library and remove
                         bookObject.read = false; 
                     }
                     else{
-                        read.style.cssText = "background-color: green";
+                        read.style.cssText = "background-color: rgb(58, 224, 72)";
                         read.textContent = "Read";
                         bookObject.read = true;
                     }
@@ -110,38 +111,4 @@ function getData(e){ //creates Book Object from form data
 add.addEventListener('click', openTheForm);
 
 form.addEventListener('submit', getData)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function getIndexOf(bookObject){
-    // let index = 0;
-    // let size = myLibrary.length;
-    //     if(size == 0)
-    //     {
-    //         return -1;
-    //     }
-        
-    //     for(let i = 0; i < size; i++){
-    //         if(myLibrary[i] == bookObject){
-    //             return i;
-    //         }
-    //     }
-    //     return -2;
-    // }
-    
 

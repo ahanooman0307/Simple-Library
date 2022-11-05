@@ -1,11 +1,21 @@
+body{
+    background-color: rgb(3, 45, 70);
+
+}
+
+#add{
+    padding: 10px 10px;
+}
 .header{
     display: flex;
     justify-content: center;
     padding: 20px 0px;
     font-size: 75px;
     color: black;
-    background-color: #eee;
-    border: 1px solid black;
+    background-color: rgb(143, 0, 0);
+    border: 2px solid white;
+    color: white;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     /* font-weight: bold; */
 
 }
@@ -17,13 +27,14 @@
 .book{
     margin: 30px 30px;
     padding: 50px;
-    border: 1px solid black;
+    border: 3px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 10px;
     font-size: 32px;
-    background-color: rgb(190, 204, 212);
+    background-color: white;
     border-radius: 40px;
 }
 
@@ -41,7 +52,28 @@
 }
 
 .read{
+    color: black;
     border: 1px solid black;
     padding: 10px 100px;
-    
+    max-width: 233.88px;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    white-space: nowrap;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    cursor: pointer;
+
+}
+
+.remove{
+
+    color: red;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    cursor: pointer;
 }
